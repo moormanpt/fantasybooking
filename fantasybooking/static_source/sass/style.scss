@@ -1,0 +1,12 @@
+@import 'foundation-settings';
+@import '../../../node_modules/foundation-sites/scss/foundation.scss';
+@include foundation-everything(true);
+
+@import 'mixins';
+@import 'typography';
+@import 'buttons';
+@import "forms";
+@import "header";
+@import "footer";
+@import 'components/components';
+@import "pages/pages";

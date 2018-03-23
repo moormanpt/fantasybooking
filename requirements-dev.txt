@@ -1,0 +1,19 @@
+-r requirements.txt
+ipdb==0.10.3
+ptpython==0.39
+isort==4.2.15
+
+# Debug Tools
+django-debug-toolbar==1.8
+django-template-debug==0.3.5
+
+# Testing
+model-mommy==1.3.0
+coverage==4.4.1
+unittest-xml-reporting==2.1.0
+codecov==2.0.9
+watchdog
+pylint==1.7.2
+prospector==0.12.7
+service-factory==0.1.5
+Werkzeug==0.12.2
