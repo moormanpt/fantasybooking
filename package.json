@@ -1,6 +1,6 @@
 {
   "name": "fantasybooking",
-  "version": "prototype",
+  "version": "0.1.0",
   "description": "",
   "main": "node/dev-server.js",
   "engines": {
@@ -22,6 +22,7 @@
     "jest": "^18.1.0",
     "jsdom": "^9.4.2",
     "resolve-url-loader": "^1.6.0",
+    "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^1.14.1"
   },
   "author": "Lightmatter Team",
@@ -51,7 +52,6 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
-    
     "webpack-bundle-tracker": "0.0.93"
   }
 }

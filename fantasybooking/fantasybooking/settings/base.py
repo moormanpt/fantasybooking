@@ -104,6 +104,7 @@ INSTALLED_APPS = (
     'fantasybooking.home',
     'fantasybooking.account',
     'fantasybooking.util',
+    'fantasybooking',
 )
 
 # A sample logging configuration. The only tangible logging
