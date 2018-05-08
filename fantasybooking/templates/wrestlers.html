@@ -1,0 +1,13 @@
+{% block body_block %}
+
+    {% if wrestlers %}
+    <ul>
+        {% for wrestler in wrestlers %}
+            <li>{{ wrestler.name }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <strong>No Wrestlers SUCKA</strong>
+    {% endif %}
+
+{% endblock %}
