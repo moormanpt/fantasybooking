@@ -6,6 +6,7 @@ from django.views.generic.edit import FormView
 from django.http import HttpResponse
 from fantasybooking.home.models import Wrestler, Stable, WeeklyStat
 from fantasybooking.home.forms import StableForm, WrestlerForm
+from django.forms import modelformset_factory
 from django.shortcuts import render
 
 from .forms import UserForm
@@ -29,16 +30,17 @@ def error(request):
 #Change Stable for Existing Wrestlers
 def wrestlers(request):
     wrestler = Wrestler.objects.get(pk=1)
+    WrestlerFormSet = modelformset_factory(Wrestler, form=WrestlerForm)
 
-    form = WrestlerForm(request.POST or None, instance=wrestler)
+    formset = WrestlerFormSet(request.POST or None)
     if request.method == 'POST':
-        if form.is_valid():
-            form.save(commit=True)
+        if formset.is_valid():
+            formset.save(commit=True)
             return create_stable(request)
         else:
             print(form.errors)
 
-    return render(request, 'wrestlers.html', {'form': form})
+    return render(request, 'wrestlers.html', {'formset': formset})
 
 #Create new stable and assign to existing user
 def create_stable(request):
@@ -52,3 +54,7 @@ def create_stable(request):
         else:
             print(form.errors)
     return render(request, 'create_stable.html', {'form': form})
+
+#Create match view
+def match(request):
+    form = MatchForm()

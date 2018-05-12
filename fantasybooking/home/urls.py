@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^form/', ExampleFormView.as_view(), name="Example Form"),
     url(r'^wrestlers/', wrestlers, name='wrestlers'),
     url(r'^create_stable/', create_stable, name='create stable'),
+    url(r'^match/', match, name='match'),
 ]
