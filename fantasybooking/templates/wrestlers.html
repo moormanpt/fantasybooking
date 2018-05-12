@@ -1,13 +1,25 @@
-{% block body_block %}
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Add Wrestlers</h1>
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                    {{ form }}
+                <input type="submit" name="submit" value="Add Wrestlers" />
+            </form>
+        </div>
 
-    {% if wrestlers %}
-    <ul>
-        {% for wrestler in wrestlers %}
-            <li>{{ wrestler.name }}</li>
-        {% endfor %}
-    </ul>
-    {% else %}
-        <strong>No Wrestlers SUCKA</strong>
-    {% endif %}
-
-{% endblock %}
+        <div>
+        {% if wrestlers %}
+        <ul>
+            {% for wrestler in wrestlers %}           
+                <li>{{ wrestler.name }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <strong>Nah Son!</strong>
+        {% endif %}
+        </div>
+    </body>
+</html>

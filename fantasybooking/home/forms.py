@@ -1,5 +1,9 @@
 import floppyforms as forms
 from parsley.decorators import parsleyfy
+from django.forms import widgets
+from django.forms import ModelForm
+from django import forms
+from fantasybooking.home.models import Stable, Wrestler, WeeklyStat
 
 
 class StripeTokenForm(forms.Form):
@@ -24,3 +28,17 @@ class UserForm(forms.Form):
 
     def good_to_go(self):
         pass
+
+class StableForm(forms.ModelForm):
+    name = forms.CharField(max_length=128)
+    
+    class Meta:
+        model = Stable
+        fields = "__all__" 
+
+class WrestlerForm(forms.ModelForm):
+    wrestler = Wrestler.objects.get(pk=1)
+
+    class Meta:
+        model = Wrestler
+        fields = ['name', 'stable']

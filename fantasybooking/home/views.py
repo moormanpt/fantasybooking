@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import FormView
 from django.http import HttpResponse
-from fantasybooking.home.models import Wrestler
+from fantasybooking.home.models import Wrestler, Stable, WeeklyStat
+from fantasybooking.home.forms import StableForm, WrestlerForm
 from django.shortcuts import render
 
 from .forms import UserForm
@@ -25,8 +26,29 @@ def error(request):
     """Generate an exception. Useful for e.g. configuing Sentry"""
     raise Exception
 
+#Change Stable for Existing Wrestlers
 def wrestlers(request):
-    wrestler_list = Wrestler.objects.all()
-    context_dict = {'wrestlers': wrestler_list}
+    wrestler = Wrestler.objects.get(pk=1)
 
-    return render(request, 'wrestlers.html', context_dict)
+    form = WrestlerForm(request.POST or None, instance=wrestler)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save(commit=True)
+            return create_stable(request)
+        else:
+            print(form.errors)
+
+    return render(request, 'wrestlers.html', {'form': form})
+
+#Create new stable and assign to existing user
+def create_stable(request):
+    form = StableForm()
+
+    if request.method == 'POST':
+        form = StableForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return wrestlers(request)
+        else:
+            print(form.errors)
+    return render(request, 'create_stable.html', {'form': form})
