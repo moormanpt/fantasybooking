@@ -3,7 +3,7 @@ from parsley.decorators import parsleyfy
 from django.forms import widgets
 from django.forms import ModelForm
 from django import forms
-from fantasybooking.home.models import Stable, Wrestler, WeeklyStat
+from fantasybooking.home.models import Stable, Wrestler, WeeklyStat, Match
 
 
 class StripeTokenForm(forms.Form):
@@ -42,3 +42,12 @@ class WrestlerForm(forms.ModelForm):
     class Meta:
         model = Wrestler
         fields = ['name', 'stable']
+
+class MatchForm(forms.ModelForm):
+    name = forms.CharField(max_length=100)
+    champion = forms.ModelChoiceField(queryset=Wrestler.objects.filter(stable__name='New World Odor'))
+    challenger = forms.ModelChoiceField(queryset=Wrestler.objects.filter(stable__name='Degeneration Sex'))
+
+    class Meta:
+        model = Match
+        fields = ['name', 'champion', 'challenger']

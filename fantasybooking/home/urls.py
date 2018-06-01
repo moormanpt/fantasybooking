@@ -3,7 +3,7 @@ from .views import error, ExampleFormView
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
-from fantasybooking.home.views import wrestlers, create_stable
+from fantasybooking.home.views import wrestlers, create_stable, match, success
 
 from django.views.generic.base import TemplateView
 
@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^wrestlers/', wrestlers, name='wrestlers'),
     url(r'^create_stable/', create_stable, name='create stable'),
     url(r'^match/', match, name='match'),
+    url(r'^success/', success, name='success'),
 ]

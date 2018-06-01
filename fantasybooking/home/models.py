@@ -3,6 +3,7 @@ from django.db import models  # NOQA
 from django_extensions.db.models import AutoSlugField  # NOQA
 from model_utils.models import TimeStampedModel  # NOQA
 from fantasybooking.account.models import User
+from django.contrib import admin
 
 # Create your models here.
 # Manager, Stable, Wrestler, WeeklyStat
@@ -30,3 +31,15 @@ class WeeklyStat(models.Model):
 
     def __str__(self):
         return self.card
+
+class Match(models.Model):
+    name = models.CharField(max_length=128)
+    champion = models.ForeignKey(Wrestler, related_name='champion', blank=True, null=True)
+    challenger = models.ForeignKey(Wrestler, related_name='challenger', blank=True, null=True)
+    winner = models.ForeignKey(Wrestler, related_name='winner', blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'matches'
+
+    def __str__(self):
+        return self.name

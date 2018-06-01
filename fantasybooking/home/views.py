@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import FormView
 from django.http import HttpResponse
-from fantasybooking.home.models import Wrestler, Stable, WeeklyStat
-from fantasybooking.home.forms import StableForm, WrestlerForm
+from fantasybooking.home.models import Wrestler, Stable, WeeklyStat, Match
+from fantasybooking.home.forms import StableForm, WrestlerForm, MatchForm
 from django.forms import modelformset_factory
 from django.shortcuts import render
 
@@ -36,7 +36,7 @@ def wrestlers(request):
     if request.method == 'POST':
         if formset.is_valid():
             formset.save(commit=True)
-            return create_stable(request)
+            return render(request, 'success.html')
         else:
             print(form.errors)
 
@@ -50,7 +50,7 @@ def create_stable(request):
         form = StableForm(request.POST)
         if form.is_valid():
             form.save(commit=True)
-            return wrestlers(request)
+            return render(request, 'success.html')
         else:
             print(form.errors)
     return render(request, 'create_stable.html', {'form': form})
@@ -58,3 +58,16 @@ def create_stable(request):
 #Create match view
 def match(request):
     form = MatchForm()
+
+    if request.method == 'POST':
+        form = MatchForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return render(request, 'success.html')
+        else:
+            print(form.errors)
+    return render(request, 'match.html', {'form':form})
+
+#Success View
+def success(request):
+    html = "<html><body>You did it!</body></html>"
