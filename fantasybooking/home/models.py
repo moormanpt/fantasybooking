@@ -48,7 +48,7 @@ class Match(models.Model):
 
     def resolve(self):
         "Provides Finish for a match"
-        champion_weekly_stat = WeeklyStat.objects.filter(wrestler=challenger).latest()
+        champion_weekly_stat = WeeklyStat.objects.filter(wrestler=champion).latest()
 
         challenger_weekly_stat = WeeklyStat.objects.filter(wrestler=challenger).latest()
         
