@@ -68,6 +68,8 @@ def match(request):
             print(form.errors)
     return render(request, 'match.html', {'form':form})
 
+#Generate Finishes for Matches
+
 #Success View
 def success(request):
     html = "<html><body>You did it!</body></html>"

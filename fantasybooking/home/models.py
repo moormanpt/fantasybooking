@@ -5,6 +5,8 @@ from model_utils.models import TimeStampedModel  # NOQA
 from fantasybooking.account.models import User
 from django.contrib import admin
 
+import pdb
+
 # Create your models here.
 # Manager, Stable, Wrestler, WeeklyStat
 
@@ -43,3 +45,14 @@ class Match(models.Model):
 
     def __str__(self):
         return self.name
+
+    def resolve(self):
+        "Provides Finish for a match"
+        champion_weekly_stat = WeeklyStat.objects.filter(wrestler=challenger).latest()
+
+        challenger_weekly_stat = WeeklyStat.objects.filter(wrestler=challenger).latest()
+        
+        if champion_weekly_stat.finish >= challenger_weekly_stat.finish:
+            return champion
+        else:
+            return challenger
