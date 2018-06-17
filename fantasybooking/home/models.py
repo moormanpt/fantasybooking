@@ -46,13 +46,14 @@ class Match(models.Model):
 
     def resolve(self):
         "Provides Finish for a match"
-        active_match = Match.objects.exclude(winner__isnull=False).order_by('id').first()
-        champion_wrestler = active_match.champion
-        challenger_wrestler = active_match.challenger
+#        active_match = Match.objects.exclude(winner__isnull=False).order_by('id').first()
+        champion_wrestler = self.champion
+        challenger_wrestler = self.challenger
         champion_weekly_stat = WeeklyStat.objects.filter(wrestler=champion_wrestler).first()
         challenger_weekly_stat = WeeklyStat.objects.filter(wrestler=challenger_wrestler).first()
        
         if champion_weekly_stat.finish >= challenger_weekly_stat.finish:
-            return champion_weekly_stat.wrestler
+            self.winner = champion_weekly_stat.wrestler
         else:
-            return challenger_weekly_stat.wrestler
+            self.winner = challenger_weekly_stat.wrestler
+        self.save()
