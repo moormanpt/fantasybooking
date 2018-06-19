@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Finish Match</h1>
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                    {{ formset }}
+                <input type="submit" name="submit" value="Add Wrestlers" />
+            </form>
+        </div>
+    </body>
+</html>
